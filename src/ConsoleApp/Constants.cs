@@ -6,7 +6,7 @@ namespace ConsoleApp
 {
     public static class Constants
     {
-        public static String ConnectionStringDapper { get; } = "Server=localhost;Database=efdapperbenchmark;User Id=sa;Password=Salih123!;";
-        public static String ConnectionStringEF { get; } = "Server=localhost;Database=efdapperbenchmark;User Id=sa;Password=Salih123!;";
+        public static String ConnectionStringDapper { get; } = "Server=(localdb)\\mssqllocaldb;Database=efdapperbenchmark;Trusted_Connection=True;MultipleActiveResultSets=true";
+        public static String ConnectionStringEF { get; } = "Server=(localdb)\\mssqllocaldb;Database=efdapperbenchmark;Trusted_Connection=True;MultipleActiveResultSets=true";
     }
 }

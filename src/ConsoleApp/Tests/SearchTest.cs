@@ -15,12 +15,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Tests
 {
-    [SimpleJob(
-        BenchmarkDotNet.Engines.RunStrategy.ColdStart,
-        BenchmarkDotNet.Jobs.RuntimeMoniker.Net60,
-        launchCount: 1,
-        targetCount: 50,
-        id: "Search Test")]
+    [SimpleJob(BenchmarkDotNet.Engines.RunStrategy.ColdStart, BenchmarkDotNet.Jobs.RuntimeMoniker.Net60, launchCount: 1, id: "Search Test")]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class SearchTest

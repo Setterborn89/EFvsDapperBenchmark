@@ -1,7 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using ConsoleApp.DataProviders;
 using ConsoleApp.Persistence.EF.Context;
-using Dapper;
 using Dommel;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +13,6 @@ namespace ConsoleApp.Tests
         BenchmarkDotNet.Engines.RunStrategy.ColdStart,
         BenchmarkDotNet.Jobs.RuntimeMoniker.Net60,
         launchCount: 5,
-        targetCount: 10,
         id: "Insert Many Test")]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
@@ -35,7 +33,7 @@ namespace ConsoleApp.Tests
 
             connection = new SqlConnection(Constants.ConnectionStringDapper);
             context = new ApplicationDbContext(dbContextOptions);
-            
+
             // let it call modelcreating method
             context.Students.Count();
         }

@@ -22,8 +22,6 @@ namespace ConsoleApp.DataProviders
             return GetStudentsDP(1).First();
         }
 
-
-
         public static ICollection<Student> GetStudentsEF(int count = 1000)
         {
             var studentFaker = new Faker<Student>("tr")

@@ -10,14 +10,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Tests
 {
-    [SimpleJob(
-        BenchmarkDotNet.Engines.RunStrategy.ColdStart,
-        BenchmarkDotNet.Jobs.RuntimeMoniker.Net60,
-        launchCount: 10,
-        targetCount: 100,
-        id: "Insert Test")]
+    [SimpleJob(BenchmarkDotNet.Engines.RunStrategy.ColdStart, BenchmarkDotNet.Jobs.RuntimeMoniker.Net60, launchCount: 10, id: "Insert Test")]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
+    [MarkdownExporterAttribute.Default]
     public class InsertTest
     {
         private readonly string rawSqlDP = @"INSERT INTO student (first_name, last_name, birth_date) 
@@ -37,6 +33,8 @@ namespace ConsoleApp.Tests
 
             connection = new SqlConnection(Constants.ConnectionStringDapper);
             context = new ApplicationDbContext(dbContextOptions);
+            context.Database.EnsureDeleted();
+            context.Database.Migrate();
 
             // let it call modelcreating method
             context.Students.Count();

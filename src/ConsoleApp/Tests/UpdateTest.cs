@@ -15,12 +15,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Tests
 {
-    [SimpleJob(
-        BenchmarkDotNet.Engines.RunStrategy.ColdStart,
-        BenchmarkDotNet.Jobs.RuntimeMoniker.Net60,
-        launchCount: 1,
-        targetCount: 100,
-        id: "Update Test")]
+    [SimpleJob(BenchmarkDotNet.Engines.RunStrategy.ColdStart, BenchmarkDotNet.Jobs.RuntimeMoniker.Net60, launchCount: 1, id: "Update Test")]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class UpdateTest

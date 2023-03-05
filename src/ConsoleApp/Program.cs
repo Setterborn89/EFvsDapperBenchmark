@@ -1,14 +1,14 @@
-﻿using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Columns;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Loggers;
+using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Validators;
 using ConsoleApp.Persistence.Dapper.Mapping;
-using ConsoleApp.Persistence.EF.Context;
 using ConsoleApp.Tests;
 using Dapper.FluentMap;
 using Dapper.FluentMap.Dommel;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
-using System.Threading.Tasks;
 
 namespace ConsoleApp
 {
@@ -16,14 +16,19 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            //BenchmarkRunner.Run<InsertTest>();
-            //BenchmarkRunner.Run<InsertManyTest>();
-            //BenchmarkRunner.Run<SelectTest>();
-            //BenchmarkRunner.Run<SearchTest>();
-            //BenchmarkRunner.Run<FunctionsTest>();
-            //BenchmarkRunner.Run<UpdateTest>();
-            //BenchmarkRunner.Run<DeleteTest>();
+            var config = new ManualConfig()
+                .WithOptions(ConfigOptions.DisableOptimizationsValidator)
+                .AddValidator(JitOptimizationsValidator.DontFailOnError)
+                .AddLogger(ConsoleLogger.Default)
+                .AddColumnProvider(DefaultColumnProviders.Instance);
 
+            BenchmarkRunner.Run<InsertTest>(config);
+            //BenchmarkRunner.Run<UpdateTest>(config);
+            //BenchmarkRunner.Run<DeleteTest>(config);
+            //BenchmarkRunner.Run<InsertManyTest>(config);
+            //BenchmarkRunner.Run<SelectTest>(config);
+            //BenchmarkRunner.Run<FunctionsTest>(config);
+            //BenchmarkRunner.Run<SearchTest>(config);
 
             Console.ReadLine();
         }

@@ -1,14 +1,10 @@
 ﻿using BenchmarkDotNet.Attributes;
-using ConsoleApp.DataProviders;
 using ConsoleApp.Domain.Entities;
 using ConsoleApp.Persistence.EF.Context;
 using Dommel;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleApp.Tests
@@ -17,7 +13,6 @@ namespace ConsoleApp.Tests
         BenchmarkDotNet.Engines.RunStrategy.ColdStart,
         BenchmarkDotNet.Jobs.RuntimeMoniker.Net60,
         launchCount: 5,
-        targetCount: 10,
         id: "Insert Many Test")]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
