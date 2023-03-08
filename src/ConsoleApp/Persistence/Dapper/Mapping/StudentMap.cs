@@ -20,10 +20,6 @@ namespace ConsoleApp.Persistence.Dapper.Mapping
                             .IsKey()
                             .SetGeneratedOption(DatabaseGeneratedOption.None)
                             .IsIdentity();
-
-            Map(i => i.FirstName).ToColumn("first_name");
-            Map(i => i.LastName).ToColumn("last_name");
-            Map(i => i.BirthDate).ToColumn("birth_date");
         }
     }
 }

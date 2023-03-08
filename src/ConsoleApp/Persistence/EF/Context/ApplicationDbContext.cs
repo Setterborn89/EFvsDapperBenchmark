@@ -8,7 +8,7 @@ namespace ConsoleApp.Persistence.EF.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Student> Students { get; set; }
+        public DbSet<Student> Student { get; set; }
 
         public ApplicationDbContext(DbContextOptions opt) : base(opt)
         {
@@ -33,9 +33,9 @@ namespace ConsoleApp.Persistence.EF.Context
             {
                 entity.ToTable("student");
                 entity.Property(i => i.Id).HasColumnName("id").UseIdentityColumn();
-                entity.Property(i => i.FirstName).HasColumnName("first_name");
-                entity.Property(i => i.LastName).HasColumnName("last_name");
-                entity.Property(i => i.BirthDate).HasColumnName("birth_date");
+                entity.Property(i => i.FirstName).HasColumnName("FirstName");
+                entity.Property(i => i.LastName).HasColumnName("LastName");
+                entity.Property(i => i.BirthDate).HasColumnName("BirthDate");
             });
 
             base.OnModelCreating(modelBuilder);

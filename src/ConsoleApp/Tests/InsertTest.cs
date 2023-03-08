@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Tests
 {
-    [SimpleJob(BenchmarkDotNet.Engines.RunStrategy.ColdStart, BenchmarkDotNet.Jobs.RuntimeMoniker.Net60, launchCount: 10, id: "Insert Test")]
+    [SimpleJob(BenchmarkDotNet.Engines.RunStrategy.ColdStart, BenchmarkDotNet.Jobs.RuntimeMoniker.Net60, launchCount: 1, id: "Insert Test")]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     [MarkdownExporterAttribute.Default]
     public class InsertTest
     {
-        private readonly string rawSqlDP = @"INSERT INTO student (first_name, last_name, birth_date) 
+        private readonly string rawSqlDP = @"INSERT INTO student (FirstName, LastName, BirthDate) 
                                             VALUES (@FirstName, @LastName, @BirthDate)";
 
-        private readonly string rawSqlEF = @"INSERT INTO student (first_name, last_name, birth_date) 
+        private readonly string rawSqlEF = @"INSERT INTO student (FirstName, LastName, BirthDate) 
                                             VALUES ({0}, {1}, {2})";
 
         private SqlConnection connection;
@@ -33,11 +33,9 @@ namespace ConsoleApp.Tests
 
             connection = new SqlConnection(Constants.ConnectionStringDapper);
             context = new ApplicationDbContext(dbContextOptions);
-            context.Database.EnsureDeleted();
-            context.Database.Migrate();
 
             // let it call modelcreating method
-            context.Students.Count();
+            context.Student.Count();
         }
 
         [Benchmark(Description = "EF Single Insert")]

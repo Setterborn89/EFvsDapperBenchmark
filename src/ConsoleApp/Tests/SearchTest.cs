@@ -47,7 +47,7 @@ namespace ConsoleApp.Tests
         [Benchmark(Description = "EF Count Equal [Mehmet]")]
         public async Task EqualEF()
         {
-            await context.Students.CountAsync(i => i.FirstName == "Mehmet");
+            await context.  Student.CountAsync(i => i.FirstName == "Mehmet");
         }
 
         #endregion
@@ -64,13 +64,7 @@ namespace ConsoleApp.Tests
         [Benchmark(Description = "EF Count StartsWith [A]")]
         public async Task StartsWithEF()
         {
-            await context.Students.CountAsync(i => i.FirstName.StartsWith("A"));
-        }
-
-        [Benchmark(Description = "EF Count StartsWith [A] F")]
-        public async Task StartsWithEFFunctions()
-        {
-            await context.Students.CountAsync(i => EF.Functions.Like(i.FirstName, "A%"));
+            await context.Student.CountAsync(i => i.FirstName.StartsWith("A"));
         }
 
         #endregion
@@ -87,13 +81,7 @@ namespace ConsoleApp.Tests
         [Benchmark(Description = "EF Count Contains [A]")]
         public async Task SearchEF()
         {
-            await context.Students.CountAsync(i => i.FirstName.Contains("A"));
-        }
-
-        [Benchmark(Description = "EF Count Contains [A] F")]
-        public async Task SearchEFFunctions()
-        {
-            await context.Students.CountAsync(i => EF.Functions.Like(i.FirstName, "%A%"));
+            await context.  Student.CountAsync(i => i.FirstName.Contains("A"));
         }
 
         #endregion
@@ -109,7 +97,7 @@ namespace ConsoleApp.Tests
         [Benchmark(Description = "EF Count Between Date")]
         public async Task SearchDateTimeEF()
         {
-            await context.Students.CountAsync(i => i.BirthDate >= startDateTime && i.BirthDate <= endDateTime);
+            await context.Student.CountAsync(i => i.BirthDate >= startDateTime && i.BirthDate <= endDateTime);
         }
 
         #endregion

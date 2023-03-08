@@ -15,7 +15,7 @@ namespace ConsoleApp.Tests
     [SimpleJob(
         BenchmarkDotNet.Engines.RunStrategy.ColdStart,
         BenchmarkDotNet.Jobs.RuntimeMoniker.Net60,
-        launchCount: 2,
+        launchCount: 1,
         id: "Delete Test")]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
@@ -46,8 +46,8 @@ namespace ConsoleApp.Tests
 
             connection = new SqlConnection(Constants.ConnectionStringDapper);
             context = new ApplicationDbContext(dbContextOptions);
-            rowCount = await context.Students.CountAsync();
-            studentList = await context.Students.OrderBy(i => Guid.NewGuid()).Take(1000).ToListAsync();
+            rowCount = await context.Student.CountAsync();
+            studentList = await context.Student.OrderBy(i => Guid.NewGuid()).Take(1000).ToListAsync();
         }
 
 
@@ -63,7 +63,7 @@ namespace ConsoleApp.Tests
         {
             var student = GetRandomStudent();
 
-            context.Students.Remove(student);
+            context.Student.Remove(student);
             await context.SaveChangesAsync();
         }
 

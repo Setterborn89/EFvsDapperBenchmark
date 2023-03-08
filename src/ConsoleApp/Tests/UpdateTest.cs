@@ -25,8 +25,8 @@ namespace ConsoleApp.Tests
         private ApplicationDbContext context;
         private int rowCount;
 
-        private readonly string rawSqlDP = @"UPDATE STUDENT SET first_name = @FirstName WHERE Id = @Id";
-        private readonly string rawSqlEF = @"UPDATE STUDENT SET first_name = {1} WHERE Id = {0}";
+        private readonly string rawSqlDP = @"UPDATE STUDENT SET FirstName = @FirstName WHERE Id = @Id";
+        private readonly string rawSqlEF = @"UPDATE STUDENT SET FirstName = {1} WHERE Id = {0}";
 
         private Student GetRandomStudent()
         {
@@ -44,8 +44,8 @@ namespace ConsoleApp.Tests
 
             connection = new SqlConnection(Constants.ConnectionStringDapper);
             context = new ApplicationDbContext(dbContextOptions);
-            rowCount = await context.Students.CountAsync();
-            studentList = await context.Students.OrderBy(i => Guid.NewGuid()).Take(1000).ToListAsync();
+            rowCount = await context.Student.CountAsync();
+            studentList = await context.Student.OrderBy(i => Guid.NewGuid()).Take(1000).ToListAsync();
         }
 
 

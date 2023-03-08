@@ -12,7 +12,7 @@ namespace ConsoleApp.Tests
     [SimpleJob(
         BenchmarkDotNet.Engines.RunStrategy.ColdStart,
         BenchmarkDotNet.Jobs.RuntimeMoniker.Net60,
-        launchCount: 5,
+        launchCount: 1,
         id: "Insert Many Test")]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
@@ -31,7 +31,7 @@ namespace ConsoleApp.Tests
             connection = new SqlConnection(Constants.ConnectionStringDapper);
 
             // let it call modelcreating method
-            context.Students.Count();
+            context.Student.Count();
         }
 
         [Benchmark(Description = "DP Count")]
@@ -43,7 +43,7 @@ namespace ConsoleApp.Tests
         [Benchmark(Description = "EF Count")]
         public async Task CountEF()
         {
-            await context.Students.CountAsync();
+            await context.Student.CountAsync();
         }
 
 
@@ -58,7 +58,7 @@ namespace ConsoleApp.Tests
         [Benchmark(Description = "EF Paged 1,50")]
         public async Task PagedEF()
         {
-            await context.Students.Take(50).ToListAsync();
+            await context.Student.Take(50).ToListAsync();
         }
 
 
@@ -73,7 +73,7 @@ namespace ConsoleApp.Tests
         [Benchmark(Description = "EF Paged 3,75")]
         public async Task Pagedv2EF()
         {
-            await context.Students.Skip(75 * 2).Take(75).ToListAsync();
+            await context.Student.Skip(75 * 2).Take(75).ToListAsync();
         }
     }
 }

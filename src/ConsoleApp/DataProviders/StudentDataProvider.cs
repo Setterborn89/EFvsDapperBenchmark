@@ -30,7 +30,7 @@ namespace ConsoleApp.DataProviders
                 .RuleFor(i => i.BirthDate, i => i.Person.DateOfBirth);
 
             var result = studentFaker.Generate(count);
-            result.ForEach(i => i.Id = null);
+            //result.ForEach(i => i.Id = null);
 
             return result;
         }

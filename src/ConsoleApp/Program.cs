@@ -3,11 +3,14 @@ using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Loggers;
 using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Validators;
+using ConsoleApp.DataProviders;
 using ConsoleApp.Persistence.Dapper.Mapping;
+using ConsoleApp.Persistence.EF.Context;
 using ConsoleApp.Tests;
 using Dapper.FluentMap;
 using Dapper.FluentMap.Dommel;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 
 namespace ConsoleApp
@@ -22,13 +25,19 @@ namespace ConsoleApp
                 .AddLogger(ConsoleLogger.Default)
                 .AddColumnProvider(DefaultColumnProviders.Instance);
 
+            var context = new ApplicationDbContext(InitEf());
+
+            context.Database.EnsureDeleted();
+            context.Database.Migrate();
+
+
             BenchmarkRunner.Run<InsertTest>(config);
-            //BenchmarkRunner.Run<UpdateTest>(config);
-            //BenchmarkRunner.Run<DeleteTest>(config);
-            //BenchmarkRunner.Run<InsertManyTest>(config);
-            //BenchmarkRunner.Run<SelectTest>(config);
-            //BenchmarkRunner.Run<FunctionsTest>(config);
-            //BenchmarkRunner.Run<SearchTest>(config);
+            BenchmarkRunner.Run<UpdateTest>(config);
+            BenchmarkRunner.Run<InsertManyTest>(config);
+            BenchmarkRunner.Run<DeleteTest>(config);
+            BenchmarkRunner.Run<SelectTest>(config);
+            BenchmarkRunner.Run<FunctionsTest>(config);
+            BenchmarkRunner.Run<SearchTest>(config);
 
             Console.ReadLine();
         }

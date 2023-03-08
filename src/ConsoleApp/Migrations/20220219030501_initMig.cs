@@ -36,7 +36,7 @@ namespace ConsoleApp.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     first_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     last_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    birth_date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    birth_date = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
